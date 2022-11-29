@@ -1,106 +1,130 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My 3D Environment</title>
-    <style type="text/css">
+
+    <link rel="apple-touch-icon" type="image/png"
+        href="./img/Ancestral_Games_Official_Logo.png">
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="shortcut icon" type="image/x-icon"
+        href="./img/Ancestral_Games_Official_Logo.png">
+
+    <link rel="mask-icon" type="image/x-icon"
+        href="./img/Ancestral_Games_Official_Logo.png"
+        color="#111">
+
+    <title>Ancestral Games</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Fira+Mono:400');
+
         body {
-            margin: 0px;
-            overflow: hidden;
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            background: #131313;
+            color: #fff;
+            font-size: 96px;
+            font-family: 'Fira Mono', monospace;
+            letter-spacing: -7px;
+        }
+
+        div {
+            animation: glitch 1s linear infinite;
+        }
+
+        @keyframes glitch {
+
+            2%,
+            64% {
+                transform: translate(2px, 0) skew(0deg);
+            }
+
+            4%,
+            60% {
+                transform: translate(-2px, 0) skew(0deg);
+            }
+
+            62% {
+                transform: translate(0, 0) skew(5deg);
+            }
+        }
+
+        div:before,
+        div:after {
+            content: attr(title);
+            position: absolute;
+            left: 0;
+        }
+
+        div:before {
+            animation: glitchTop 1s linear infinite;
+            clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+        }
+
+        @keyframes glitchTop {
+
+            2%,
+            64% {
+                transform: translate(2px, -2px);
+            }
+
+            4%,
+            60% {
+                transform: translate(-2px, 2px);
+            }
+
+            62% {
+                transform: translate(13px, -1px) skew(-13deg);
+            }
+        }
+
+        div:after {
+            animation: glitchBotom 1.5s linear infinite;
+            clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+            -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+        }
+
+        @keyframes glitchBotom {
+
+            2%,
+            64% {
+                transform: translate(-2px, 0);
+            }
+
+            4%,
+            60% {
+                transform: translate(-2px, 0);
+            }
+
+            62% {
+                transform: translate(-22px, 5px) skew(21deg);
+            }
         }
     </style>
+
+    <script>
+        window.console = window.console || function (t) { };
+    </script>
+
+    <script>
+        if (document.location.search.match(/type=embed/gi)) {
+            window.parent.postMessage("resize", "*");
+        }
+    </script>
+
 </head>
 
-<body>
-    
-<script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+<body translate="no">
+    <div title="404">404</div>
 
-<script type="importmap">
-    {
-        "imports": {
-            "three": "../build/three.module.js",
-            "three/addons/": "./jsm/"
-        }
-    }
-</script>
-
-<script type="module">
-
-    import * as THREE from 'three';
-
-    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-
-let camera, scene, renderer, rayCaster, controls;
-
-    init();
-    animate();
-
-    function init() {
-
-        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
-    camera.position.set(0, 5, 5);
-
-    scene = new THREE.Scene();
-    //dark grey background
-    scene.background = new THREE.Color("rgb(0,0,0)");
-
-    rayCaster = new THREE.Raycaster();
-
-    renderer = new THREE.WebGLRenderer();
-    renderer.shadowMap.enabled = true;
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.outputEncoding = THREE.sRGBEncoding;
-    document.body.appendChild(renderer.domElement);
-
-    controls = new OrbitControls(camera, renderer.domElement);
-
-    // Lights
-
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-    scene.add(ambientLight);
-
-    const light1 = new THREE.DirectionalLight(0xefefff, 1);
-    light1.position.set(1, 10, 10);
-    light1.castShadow = true;
-    scene.add(light1);
-
-    const loader = new GLTFLoader();
-    loader.load("https://cdn.glitch.me/6a395043-d144-4056-b986-caaf327c3e45/smart_cube.glb?v=1669742570302", function (gltf) {
-        Mesh = gltf.scene.children[0];
-    Mesh.rotation.y = -15;
-    Mesh.position.set(0, 0, 0);
-    Mesh.setSize = 5;
-    Mesh.castShadow = true;
-    Mesh.receiveShadow = true;
-    scene.add(Mesh);
-            });
-
-    window.addEventListener('resize', onWindowResize);
-
-        }
-
-    function onWindowResize() {
-        camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-        }
-
-    function animate() {
-        requestAnimationFrame(animate);
-    Mesh.rotation.y += 0.01;
-    render();
-        }
-
-    function render() {
-        renderer.render(scene, camera);
-        }
-
-    </script>
 </body>
 
 </html>
+
