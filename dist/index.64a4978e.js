@@ -532,30 +532,30 @@ function hmrAcceptRun(bundle, id) {
 }
 
 },{}],"goJYj":[function(require,module,exports) {
-var _three = require("three");
-var _orbitControlsJs = require("three/examples/jsm/controls/OrbitControls.js"); // orbit controls Module
-var _gltfloaderJs = require("three/examples/jsm/loaders/GLTFLoader.js");
+var _threeModuleJs = require("../../node_modules/three/build/three.module.js");
+var _orbitControlsJs = require("../../node_modules/three/examples/jsm/controls/OrbitControls.js"); // orbit controls Module
+var _gltfloaderJs = require("../../node_modules/three/examples/jsm/loaders/GLTFLoader.js");
 let camera, scene, renderer, rayCaster, controls;
 init();
 animate();
 function init() {
-    camera = new _three.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
+    camera = new _threeModuleJs.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
     camera.position.set(0, 5, 5);
-    scene = new _three.Scene();
+    scene = new _threeModuleJs.Scene();
     //dark grey background
-    scene.background = new _three.Color("rgb(0,0,0)");
-    rayCaster = new _three.Raycaster();
-    renderer = new _three.WebGLRenderer();
+    scene.background = new _threeModuleJs.Color("rgb(0,0,0)");
+    rayCaster = new _threeModuleJs.Raycaster();
+    renderer = new _threeModuleJs.WebGLRenderer();
     renderer.shadowMap.enabled = true;
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.outputEncoding = _three.sRGBEncoding;
+    renderer.outputEncoding = _threeModuleJs.sRGBEncoding;
     document.body.appendChild(renderer.domElement);
     controls = new (0, _orbitControlsJs.OrbitControls)(camera, renderer.domElement);
     // Lights
-    const ambientLight = new _three.AmbientLight(0xffffff, 0.5);
+    const ambientLight = new _threeModuleJs.AmbientLight(0xffffff, 0.5);
     scene.add(ambientLight);
-    const light1 = new _three.DirectionalLight(0xefefff, 1);
+    const light1 = new _threeModuleJs.DirectionalLight(0xefefff, 1);
     light1.position.set(1, 10, 10);
     light1.castShadow = true;
     scene.add(light1);
@@ -585,7 +585,7 @@ function render() {
     renderer.render(scene, camera);
 }
 
-},{"three":"ktPTu","three/examples/jsm/controls/OrbitControls.js":"7mqRv","three/examples/jsm/loaders/GLTFLoader.js":"dVRsF"}],"ktPTu":[function(require,module,exports) {
+},{"../../node_modules/three/build/three.module.js":"ktPTu","../../node_modules/three/examples/jsm/controls/OrbitControls.js":"7mqRv","../../node_modules/three/examples/jsm/loaders/GLTFLoader.js":"dVRsF"}],"ktPTu":[function(require,module,exports) {
 /**
  * @license
  * Copyright 2010-2022 Three.js Authors
