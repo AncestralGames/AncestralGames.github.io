@@ -1,130 +1,21 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <link rel="apple-touch-icon" type="image/png"
-        href="./img/Ancestral_Games_Official_Logo.png">
-    <meta name="apple-mobile-web-app-title" content="CodePen">
-
-    <link rel="shortcut icon" type="image/x-icon"
-        href="./img/Ancestral_Games_Official_Logo.png">
-
-    <link rel="mask-icon" type="image/x-icon"
-        href="./img/Ancestral_Games_Official_Logo.png"
-        color="#111">
-
-    <title>Ancestral Games</title>
-
-    <style>
-        @import url('https://fonts.googleapis.com/css?family=Fira+Mono:400');
-
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My 3D Environment</title>
+    <style type="text/css">
         body {
-            display: flex;
-            width: 100vw;
-            height: 100vh;
-            align-items: center;
-            justify-content: center;
-            margin: 0;
-            background: #131313;
-            color: #fff;
-            font-size: 96px;
-            font-family: 'Fira Mono', monospace;
-            letter-spacing: -7px;
-        }
-
-        div {
-            animation: glitch 1s linear infinite;
-        }
-
-        @keyframes glitch {
-
-            2%,
-            64% {
-                transform: translate(2px, 0) skew(0deg);
-            }
-
-            4%,
-            60% {
-                transform: translate(-2px, 0) skew(0deg);
-            }
-
-            62% {
-                transform: translate(0, 0) skew(5deg);
-            }
-        }
-
-        div:before,
-        div:after {
-            content: attr(title);
-            position: absolute;
-            left: 0;
-        }
-
-        div:before {
-            animation: glitchTop 1s linear infinite;
-            clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
-            -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
-        }
-
-        @keyframes glitchTop {
-
-            2%,
-            64% {
-                transform: translate(2px, -2px);
-            }
-
-            4%,
-            60% {
-                transform: translate(-2px, 2px);
-            }
-
-            62% {
-                transform: translate(13px, -1px) skew(-13deg);
-            }
-        }
-
-        div:after {
-            animation: glitchBotom 1.5s linear infinite;
-            clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
-            -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
-        }
-
-        @keyframes glitchBotom {
-
-            2%,
-            64% {
-                transform: translate(-2px, 0);
-            }
-
-            4%,
-            60% {
-                transform: translate(-2px, 0);
-            }
-
-            62% {
-                transform: translate(-22px, 5px) skew(21deg);
-            }
+            margin: 0px;
+            overflow: hidden;
         }
     </style>
-
-    <script>
-        window.console = window.console || function (t) { };
-    </script>
-
-    <script>
-        if (document.location.search.match(/type=embed/gi)) {
-            window.parent.postMessage("resize", "*");
-        }
-    </script>
-
 </head>
 
-<body translate="no">
-    <div title="404">404</div>
-
+<body>
+    <script src="./src/js/scripts.js" type="module"> </script>
 </body>
 
 </html>
-
